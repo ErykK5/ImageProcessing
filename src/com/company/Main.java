@@ -1,6 +1,8 @@
 package com.company;
 
+import com.company.processing.Close;
 import com.company.processing.Ordfilt2;
+import com.company.processing.Regionprops;
 
 public class Main {
 
@@ -15,14 +17,16 @@ public class Main {
 
         switch (number) {
             case 1 :
-                //
+                Regionprops regionprops = new Regionprops(path);
+                regionprops.start();
                 break;
             case 2 :
                 Ordfilt2 ordfilt2 = new Ordfilt2(path);
                 ordfilt2.start();
                 break;
             case 3 :
-                //
+                Close close = new Close(path);
+                close.start();
                 break;
             case 4 :
                 //
