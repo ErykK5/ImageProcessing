@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.processing.Close;
+import com.company.processing.GeoDistance;
 import com.company.processing.Ordfilt2;
 import com.company.processing.Regionprops;
 
@@ -29,7 +30,8 @@ public class Main {
                 close.start();
                 break;
             case 4 :
-                //
+                GeoDistance geoDistance = new GeoDistance(path);
+                geoDistance.start();
                 break;
             default:
                 break;

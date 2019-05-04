@@ -50,6 +50,22 @@ public class Close {
 
         dylatation(values);
 
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j< width; j++) {
+                if (values[j][i] == 2)
+                    values[j][i] = 1;
+            }
+        }
+
+        erosion(values);
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j< width; j++) {
+                if (values[j][i] == 2)
+                    values[j][i] = 1;
+            }
+        }
+
         int p;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -66,7 +82,33 @@ public class Close {
         saveImage(file,image);
     }
 
-    private int[][] dylatation(int[][] values) {
+    private void erosion(int[][] values) {
+        for (int i = 0; i < height; i++ ) {
+            for (int j = 0; j < width; j++ ) {
+                if (checkIfFill2(values,i,j)) {
+                    values[j][i] = 0;
+                } else {
+                    values[j][i] = 2;
+                }
+            }
+        }
+    }
+
+    private boolean checkIfFill2(int[][] values, int h, int w) {
+        if (h<radius || h>height-radius || w<radius || w>width-radius) {
+            return false;
+        }
+        for (int i = h+radius, x = 0; i >= h-radius && h+radius<height; i--, x++) {
+            for (int j = w-radius, y = 0; j <= w+radius && w+radius<width; j++, y++) {
+                if ((values[j][i] != mask[x][y]) && values[j][i] == 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private void dylatation(int[][] values) {
         for (int i = 0; i < height; i++ ) {
             for (int j = 0; j < width; j++ ) {
                 if (checkIfFill(values,i,j)) {
@@ -76,7 +118,6 @@ public class Close {
                 }
             }
         }
-        return values;
     }
 
     private boolean checkIfFill(int[][] values, int h, int w) {
