@@ -81,14 +81,12 @@ public class Regionprops {
             }
         }
         List<NastedPoint> listFirst = new ArrayList<>();
-        int arrIter = 0;
 
-        //List<Point> list = new ArrayList<>();
         int iter = 2;
         int x = 0;
         int y = 0;
-        for (int i = 0, i2 = i; i < height/diameter-5; i++) {
-            for (int j = 0, j2 = j; j < width/diameter-5; j++) {
+        for (int i = 0, i2 = i; i < height/diameter-2; i++) {
+            for (int j = 0, j2 = j; j < width/diameter-2; j++) {
                 if (minVal[i][j] == 1) {
                     while (j2 != width/diameter) {
                         if (minVal[i2][j2+1] == 1) {
@@ -118,8 +116,8 @@ public class Regionprops {
         for (int it = 0; it < listFirst.size(); it++)
             arr[it] = listFirst.get(it);
 
-        for (int i = 0; i < height/diameter-5; i++) {
-            for (int j = 0; j < width/diameter-5; j++) {
+        for (int i = 0; i < height/diameter-2; i++) {
+            for (int j = 0; j < width/diameter-2; j++) {
                 if (minVal[i][j] != 0 && minVal[i][j] != 1) {
                     for (int c = 0; c < arr.length; c++) {
                         if (minVal[i][j] == arr[c].iter && j*diameter > arr[c].farX*diameter)
@@ -203,6 +201,8 @@ public class Regionprops {
         System.out.print("Diameter: ");
         Scanner sc = new Scanner(System.in);
         setDiameter(sc.nextInt());
+        if (diameter < 5)
+            diameter = 5;
     }
 
     public Regionprops(String path) {
