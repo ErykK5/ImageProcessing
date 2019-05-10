@@ -55,8 +55,9 @@ public class GeoDistance {
         marker[A.x][A.y] = 1;
 
         int iter = 0;
+        int condition = height + width;
 
-        while (marker[B.x][B.y] == 0) {
+        while (iter < condition) {
             marker = dilatation(marker,dilationMap,iter);
 
             marker = logicalAndForArrays(marker,original);
@@ -76,7 +77,6 @@ public class GeoDistance {
         } catch (IOException e) {
             System.out.println(e);
         }
-        System.out.println(iter);
     }
 
 
@@ -87,8 +87,8 @@ public class GeoDistance {
             for (int j = 0; j < width; j++) {
                 if ((marker[j][i] == original[j][i]) && original[j][i] == 1 )
                     marker[j][i] = 1;
-                else
-                    marker[j][i] = 0;
+                else if ((marker[j][i] == 1) && original[j][i] == 0 )
+                    marker[j][i] = 3;
             }
         }
         return marker;
@@ -98,10 +98,10 @@ public class GeoDistance {
         for (int i = 0; i < height; i++ ) {
             for (int j = 0; j < width; j++ ) {
                 if (values[j][i] == 1) {
-                    if (j>0 && values[j-1][i] == 0) values[j-1][i] = 2;
-                    if (i>0 && values[j][i-1] == 0) values[j][i-1] = 2;
-                    if (j+1<width && values[j+1][i]==0) values[j+1][i] = 2;
-                    if (i+1<height && values[j][i+1]==0) values[j][i+1] = 2;
+                    if (j > 0 && values[j - 1][i] == 0) values[j - 1][i] = 2;
+                    if (i > 0 && values[j][i - 1] == 0) values[j][i - 1] = 2;
+                    if (j + 1 < width && values[j + 1][i] == 0) values[j + 1][i] = 2;
+                    if (i + 1 < height && values[j][i + 1] == 0) values[j][i + 1] = 2;
                 }
             }
         }
@@ -130,11 +130,6 @@ public class GeoDistance {
         A.x = sc.nextInt();
         System.out.print("y = ");
         A.y = sc.nextInt();
-        System.out.println("NastedPoint B");
-        System.out.print("x = ");
-        B.x = sc.nextInt();
-        System.out.print("y = ");
-        B.y = sc.nextInt();
     }
 
     public void saveImage(File file, BufferedImage image, String name) {
@@ -167,11 +162,6 @@ public class GeoDistance {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
                 SE[i][j] = 1;
-        //SE[0][0] = 0;
-        //SE[2][2] = 0;
-        //SE[0][2] = 0;
-        //SE[2][0] = 0;
         A = new Point();
-        B = new Point();
     }
 }
