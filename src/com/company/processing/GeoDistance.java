@@ -55,10 +55,10 @@ public class GeoDistance {
         marker[A.x][A.y] = 1;
 
         int iter = 0;
-        int condition = height + width;
+        int condition = (height + width)*2;
 
         while (iter < condition) {
-            marker = dilatation(marker,dilationMap,iter);
+            marker = dilatation(marker,dilationMap,iter%255);
 
             marker = logicalAndForArrays(marker,original);
 

@@ -124,45 +124,18 @@ public class Close {
 
         if (h<radius || h>height-radius || w<radius || w>width-radius) {
             if (h<radius && w<radius) {
-                return false; //fix
+                return false;
             } else if (h<radius && w>width-radius) {
-                return false; //fix
+                return false;
             } else if (w<radius && h>height-radius) {
-                return false; //fix
+                return false;
             } else if (h>height-radius && w>width-radius) {
-                return false; //fix
+                return false;
             } else if (h<radius) {
-                /*
-                for (int i = h+(radius-h), x = 0; i <= h-radius; i++, x++) {
-                    for (int j = w-radius, y = 0; j <= w+radius; j++, y++) {
-                        if ((values[j][i] == mask[x][y]) && values[j][i] == 1) {
-                            return true;
-                        }
-                    }
-                }
-                */
                 return false;
             } else if (h>height-radius) {
-                /*
-                for (int i = h+radius, x = 0; i <= h-radius && i < height; i++, x++) {
-                    for (int j = w-radius, y = 0; j <= w+radius; j++, y++) {
-                        if ((values[j][i] == mask[x][y]) && values[j][i] == 1) {
-                            return true;
-                        }
-                    }
-                }
-                */
                 return false;
             } else if (w<radius) {
-                /*
-                for (int i = h+radius, x = 0; i <= h-radius; i++, x++) {
-                    for (int j = w-(radius-w), y = 0; j <= w+radius; j++, y++) {
-                        if ((values[j][i] == mask[x][y]) && values[j][i] == 1) {
-                            return true;
-                        }
-                    }
-                }
-                 */
                 return false;
             } else {
                 return false;
